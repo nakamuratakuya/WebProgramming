@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +14,10 @@
 		<p align="right">
 		<div class="alert alert-primary" role="alert">
 			<p align="right">
-				user san
+				user san ${userInfo.name}
 				<span style="margin-right: 12em;"></span>
 				<a
-					href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/login.html"
+					href="LogoutServlet"
 					class="alert-link">ログアウト</a>
 			</p>
 		</div>
@@ -26,7 +29,7 @@
 				href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/createUser.html"
 				role="button">sinkitouroku</a>
 		</p>
-
+			<!-- /ボタン -->
 
 		<div class="input-group input-group-sm mb-3">
 			<div class="input-group-prepend">

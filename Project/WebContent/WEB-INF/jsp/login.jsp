@@ -25,7 +25,7 @@
 					ログインID：<input type="text" name="login_id">
 				</p>
 				<p>
-					パスワード：<input type="password" name="password">
+					パスワード：<input type="password" name="password" id="inputPassword">
 				</p>
 				<p>
 					<button class="btn btn-primary" type="submit">login</button>
