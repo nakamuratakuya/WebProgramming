@@ -64,8 +64,8 @@ public class UserDao {
 			conn = DBManager.getConnection();
 
 			// SELECT文を準備
-			// TODO: 未実装：管理者以外を取得するようSQLを変更する
-			String sql = "SELECT * FROM user";
+			// TODO: 未実装：管理者以外を取得するようSQLを変更する 
+			String sql = "SELECT * FROM user WHERE id!=1";
 
 			// SELECTを実行し、結果表を取得
 			Statement stmt = conn.createStatement();

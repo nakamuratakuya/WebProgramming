@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html>
+<html lang= "ja">
 <head>
 <meta charset="UTF-8">
 <title>users</title>
@@ -33,8 +33,7 @@
 
 		<div class="input-group input-group-sm mb-3">
 			<div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-sm">login
-					ID</span>
+				<span class="input-group-text" id="inputGroup-sizing-sm">login ID</span>
 			</div>
 			<input type="text" class="form-control" aria-label="Small"
 				aria-describedby="inputGroup-sizing-sm">
@@ -77,37 +76,40 @@
 					<th scope="col">date of birth</th>
 					<th scope="col"></th>
 				</tr>
-
-
 			</thead>
 			<tbody>
 				<tr>
 					<th scope="row">1</th>
 					<td>ちっぴーせんせい</td>
 					<td>04/26/1989</td>
-					<td><a class="btn btn-primary"
-						href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/usersInfo.html"
-						role="button">info</a> <a class="btn btn-success"
-						href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/informationUpdate.html"
-						role="button">update</a> <a class="btn btn-danger"
-						href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/userDelete.html"
-						role="button">delete</a></td>
+					<td><a class="btn btn-primary"href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/usersInfo.jsp"
+						role="button">info</a>
+						<a class="btn btn-success"href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/informationUpdate.html"
+						role="button">update</a> 
+						<a class="btn btn-danger"href="file:///C:/Users/gunka/Documents/WebProgramming/Project/WebContent/WEB-INF/jsp/chippi-Delete.jsp"
+						role="button">delete</a>
+					</td>
 				</tr>
+				<c:forEach var="user" items="${userList}" >
 				<tr>
-					<th scope="row">2</th>
-					<td>大谷 翔平</td>
-					<td>07/04/1994</td>
-					<td><a class="btn btn-primary" href="#" role="button">info</a>
-						<a class="btn btn-success" href="#" role="button">kousin</a> <a
-						class="btn btn-danger" href="#" role="button">kesu</a></td>
+					<th>${user.loginId}</th>
+					<td>${user.name}</td>
+					<td>${user.birthDate}</td>
+					<td>
+						<a class="btn btn-primary" href="#" role="button">info</a>
+						<a class="btn btn-success" href="#" role="button">update</a>
+						<a class="btn btn-danger" href="#" role="button">delete</a>
+						 <!-- TODO 未実装；ログインボタンの表示制御を行う -->
+					</td>
 				</tr>
+				</c:forEach>
 				<tr>
 					<th scope="row">3</th>
 					<td>Larry</td>
 					<td>08/16/1963</td>
 					<td><a class="btn btn-primary" href="#" role="button">info</a>
-						<a class="btn btn-success" href="#" role="button">kousin</a> <a
-						class="btn btn-danger" href="#" role="button">kesu</a></td>
+						<a class="btn btn-success" href="#" role="button">kousin</a>
+						<a class="btn btn-danger" href="#" role="button">kesu</a></td>
 				</tr>
 			</tbody>
 		</table>

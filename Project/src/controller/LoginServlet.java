@@ -34,7 +34,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		// TODO 未実装：ログインセッションがある場合、ユーザ一覧画面にリダイレクトさせる
 
 		// フォワード
@@ -47,7 +46,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 
 		// リクエストパラメータの入力項目を取得
 		String loginId = request.getParameter("login_id");
@@ -69,8 +67,10 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		/** テーブルに該当のデータが見つかった場合 **/
-		// セッションにユーザの情報をセット
+		// HttpSessionインスタンスの取得
 		HttpSession session = request.getSession();
+
+		// セッションにユーザの情報をセット
 		session.setAttribute("userInfo", user);
 
 		// ユーザ一覧のサーブレットにリダイレクト
