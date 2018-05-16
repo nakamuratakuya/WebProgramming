@@ -26,7 +26,7 @@
 
 			<!-- ボタン -->
 			<a class="btn btn-danger"
-				href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/createUser.html"
+				href="CreateUserServlet"
 				role="button">sinkitouroku</a>
 		</p>
 			<!-- /ボタン -->
@@ -85,7 +85,7 @@
 					<td><a class="btn btn-primary"href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/usersInfo.jsp"
 						role="button">info</a>
 						<a class="btn btn-success"href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/informationUpdate.html"
-						role="button">update</a> 
+						role="button">update</a>
 						<a class="btn btn-danger"href="file:///C:/Users/gunka/Documents/WebProgramming/Project/WebContent/WEB-INF/jsp/chippi-Delete.jsp"
 						role="button">delete</a>
 					</td>
@@ -98,7 +98,7 @@
 					<td>
 						<a class="btn btn-primary" href="#" role="button">info</a>
 						<a class="btn btn-success" href="#" role="button">update</a>
-						<a class="btn btn-danger" href="#" role="button">delete</a>
+						<a class="btn btn-danger" href="DeleteServlet?id=${user.id}" role="button">delete</a>
 						 <!-- TODO 未実装；ログインボタンの表示制御を行う -->
 					</td>
 				</tr>

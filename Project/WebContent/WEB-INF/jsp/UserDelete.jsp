@@ -24,16 +24,17 @@
 		<!-- 222222 -->
 		<div class="background-denger">
 			<h1 align="center">user Delete</h1>
+
+
 			<h3>username: ちっぴーせんせい</h3>
 			<h3>をほんとに削除してよろしいでしょうか。</h3>
 
 			<div class="dekaiyohaku">
 			<div class="tyuo-area">
 			<div class="yokonarabi-area">
-
-				<input class="btn btn-primary" type="reset" value="Yes!">
+				 <a class="btn btn-primary" href="DeleteServlet?id=${user.id}">yes!</a>
 				<span style="margin-right: 7em;"></span>
-				<input class="btn btn-primary" type="reset" value="ofcourse!! ">
+				<input class="btn btn-primary" type="reset" value="no!! ">
 			</div>
 			</div>
 			</div>

@@ -62,15 +62,15 @@ public class UserDao {
 		try {
 			// データベースへ接続
 			conn = DBManager.getConnection();
-
+			System.out.println("aaaaaaa");
 			// SELECT文を準備
-			// TODO: 未実装：管理者以外を取得するようSQLを変更する 
-			String sql = "SELECT * FROM user WHERE id!=1";
-
+			// TODO: 未実装：管理者以外を取得するようSQLを変更する
+			String sql = "SELECT * FROM user";
+			System.out.println("cccccccc");
 			// SELECTを実行し、結果表を取得
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-
+			System.out.println("dddddddd");
 			// 結果表に格納されたレコードの内容を
 			// Userインスタンスに設定し、ArrayListインスタンスに追加
 			while(rs.next()) {
@@ -82,10 +82,10 @@ public class UserDao {
 			String createDate = rs.getString("create_date");
 			String updateDate = rs.getString("update_date");
 			User user = new User(id,loginId,name,birthDate,password,createDate,updateDate);
-
+			System.out.println("bbbbbbbb");
 			userList.add(user);
 			}
-
+			System.out.println("ffffffff");
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -103,4 +103,71 @@ public class UserDao {
 		return userList;
 	}
 
+	public void  createuser(String loginId, String password ,String name ,String birthdate) {
+		Connection conn = null;
+		try {
+			// データベースへ接続
+			conn = DBManager.getConnection();
+
+			// SELECT文を準備
+			String sql = "INSERT INTO user(login_id, name, birth_date, password, create_date, update_date)"
+					 +"VALUES (? , ? ,? ,  ?, now(), now())";
+
+			// SELECTを実行し、結果表を取得
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, loginId);
+			pStmt.setString(2, name);
+			pStmt.setString(3, birthdate);
+			pStmt.setString(4, password);
+			pStmt.executeUpdate();
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+
+				}
+			}
+		}
+	}
+	public void  userdelete(String id) {
+		Connection conn = null;
+		try {
+			// データベースへ接続
+			conn = DBManager.getConnection();
+
+			// SELECT文を準備
+			String sql = "DELETE FROM user WHERE id =?";
+
+			// SELECTを実行し、結果表を取得
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1,id);
+
+			pStmt.executeUpdate();
+		}
+			// 主キーに紐づくレコードは1件のみなので、rs.next()は1回だけ行う
+
+		catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+
+				}
+			}
+		}
+	}
 }
