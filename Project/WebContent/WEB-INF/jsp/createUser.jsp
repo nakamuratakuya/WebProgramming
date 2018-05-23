@@ -13,8 +13,8 @@
 	<div class="container">
 		<div class="username-area">
 			<p align="right">
-				GUNDAMUCさん <span style="margin-right: 12em;"> </span> <a
-					href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/login.html">"ここから出ていけー"
+				 ${userInfo.name}さん <span style="margin-right: 12em;"> </span> <a
+					href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/login.html">"log_out"
 				</a>
 			</p>
 		</div>
@@ -78,7 +78,7 @@
 			</p>
 		</form>
 		<a
-			href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/users.html">"戻る"
+			href="UserListServlet">"戻る"
 		</a>
 	</div>
 </body>

@@ -48,7 +48,7 @@
 			</div>
 			<div style="clear: both;"></div>
 			<a
-				href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/users.html">"戻る"
+				href="UserListServlet">"戻る"
 			</a>
 		</div>
 

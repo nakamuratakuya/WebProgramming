@@ -30,8 +30,18 @@ h4 {
 	padding: 10px;
 }
 .dekaimoji{
-	font-size:200%
+	font-size:200%;
 }
 .dekaiyohaku{
 	padding: 200px;
 }
+.display-inline{
+	display : inline-flex;
+	display : -webkit-inline-box;
+	display : -ms-inline-flexbox;
+	display : -webkit-inline-flex;
+}
+
+
+}
+

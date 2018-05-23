@@ -39,19 +39,17 @@ public class CreateUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+				request.setCharacterEncoding("UTF-8");
 		// リクエストパラメータの入力項目を取得
 				String loginId = request.getParameter("login_id");
 				String password1 = request.getParameter("password1");
 				String password2 = request.getParameter("password2");
-
 				String name = request.getParameter("name");
 				String birthdate = request.getParameter("birthdate");
 
 				if(!password1.equals(password2)) {
 					// リクエストスコープにエラーメッセージをセット
 					request.setAttribute("errMsg", "passwordが違います。");
-					System.out.println("aaaaa");
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/createUser.jsp");
 					dispatcher.forward(request, response);
 				}
@@ -59,8 +57,7 @@ public class CreateUserServlet extends HttpServlet {
 				UserDao userDao = new UserDao();
 				userDao.createuser(loginId,password1,name,birthdate);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/users.jsp");
-				dispatcher.forward(request, response);
+				response.sendRedirect("UserListServlet");
 	}
 
 }

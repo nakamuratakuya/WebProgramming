@@ -14,7 +14,7 @@
 		<p align="right">
 		<div class="alert alert-primary" role="alert">
 			<p align="right">
-				user san ${userInfo.name}
+				 ${sessionScope.userInfo.loginId} san
 				<span style="margin-right: 12em;"></span>
 				<a
 					href="LogoutServlet"
@@ -97,7 +97,7 @@
 					<td>${user.birthDate}</td>
 					<td>
 						<a class="btn btn-primary" href="#" role="button">info</a>
-						<a class="btn btn-success" href="#" role="button">update</a>
+						<a class="btn btn-success" href="InformationUpdateServlet?id=${user.id}" role="button">update</a>
 						<a class="btn btn-danger" href="DeleteServlet?id=${user.id}" role="button">delete</a>
 						 <!-- TODO 未実装；ログインボタンの表示制御を行う -->
 					</td>
