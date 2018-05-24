@@ -55,8 +55,13 @@ public class CreateUserServlet extends HttpServlet {
 				}
 
 				UserDao userDao = new UserDao();
-				userDao.createuser(loginId,password1,name,birthdate);
+				boolean result = userDao.createuser(loginId,password1,name,birthdate);
 
+				if(!result) {
+					request.setAttribute("errMsg", "すでに使用されているログインidです。");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/createUser.jsp");
+					dispatcher.forward(request, response);
+				}
 				response.sendRedirect("UserListServlet");
 	}
 

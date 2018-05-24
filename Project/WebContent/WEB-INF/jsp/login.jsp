@@ -22,10 +22,10 @@
 
 			<form action="LoginServlet" method="post">
 				<p>
-					ログインID：<input type="text" name="login_id">
+					ログインID：<input type="text" required name="login_id">
 				</p>
 				<p>
-					パスワード：<input type="password" name="password" id="inputPassword">
+					パスワード：<input type="password" required name="password" id="inputPassword">
 				</p>
 				<p>
 					<button class="btn btn-primary" type="submit">login</button>

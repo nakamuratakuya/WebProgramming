@@ -27,7 +27,7 @@
 			<h1 align="center">user Delete</h1>
 
 
-			<h3>username: ${user.loginId}</h3>
+			<h3>userlogin_id: ${user.loginId}</h3>
 			<h3>をほんとに削除してよろしいでしょうか。</h3>
 
 			<div class="dekaiyohaku">

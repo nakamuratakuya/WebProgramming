@@ -1,5 +1,9 @@
 package dao;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.xml.bind.DatatypeConverter;
 
 import model.User;
 
@@ -24,7 +30,7 @@ public class UserDao {
 			// SELECTを実行し、結果表を取得
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, loginId);
-			pStmt.setString(2, password);
+			pStmt.setString(2, chengePassword(password));
 			ResultSet rs = pStmt.executeQuery();
 
 			// 主キーに紐づくレコードは1件のみなので、rs.next()は1回だけ行う
@@ -65,7 +71,7 @@ public class UserDao {
 
 			// SELECT文を準備
 			// TODO: 未実装：管理者以外を取得するようSQLを変更する
-			String sql = "SELECT * FROM user";
+			String sql = "SELECT * FROM user WHERE  login_id != 'admin'";
 
 			// SELECTを実行し、結果表を取得
 			Statement stmt = conn.createStatement();
@@ -103,7 +109,61 @@ public class UserDao {
 		return userList;
 	}
 
-	public void  createuser(String loginId, String password ,String name ,String birthdate) {
+
+	public List<User> findSearchl(String loginId, ) {
+		Connection conn = null;
+		List<User> userList = new ArrayList<User>();
+		try {
+			// データベースへ接続
+			conn = DBManager.getConnection();
+
+			// SELECT文を準備
+			// TODO: 未実装：管理者以外を取得するようSQLを変更する
+			String sql = "SELECT * FROM user WHERE  login_id != 'admin'";
+
+			if(!loginId.equals("")) {
+				sql +=" and login_id = '" + loginId + "'";
+			}
+
+
+
+			// SELECTを実行し、結果表を取得
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+
+			// 結果表に格納されたレコードの内容を
+			// Userインスタンスに設定し、ArrayListインスタンスに追加
+			while(rs.next()) {
+			int id = rs.getInt("id");
+			String loginId = rs.getString("login_id");
+			String name = rs.getString("name");
+			Date birthDate = rs.getDate("birth_date");
+			String password = rs.getString("password");
+			String createDate = rs.getString("create_date");
+			String updateDate = rs.getString("update_date");
+			User user = new User(id,loginId,name,birthDate,password,createDate,updateDate);
+
+			userList.add(user);
+			}
+
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return userList;
+	}
+
+	public boolean createuser(String loginId, String password ,String name ,String birthdate) {
 		Connection conn = null;
 		try {
 			// データベースへ接続
@@ -118,14 +178,15 @@ public class UserDao {
 			pStmt.setString(1, loginId);
 			pStmt.setString(2, name);
 			pStmt.setString(3, birthdate);
-			pStmt.setString(4, password);
+			pStmt.setString(4, chengePassword(password));
 			pStmt.executeUpdate();
 
+			return true;
 		}
 
 		catch (SQLException e) {
 			e.printStackTrace();
-
+			return false;
 		} finally {
 			// データベース切断
 			if (conn != null) {
@@ -219,20 +280,18 @@ public class UserDao {
 		try {
 			// データベースへ接続
 			conn = DBManager.getConnection();
-			System.out.println("aaaaaa");
 			// SELECT文を準備
 				String sql = "UPDATE user SET password = ?, name = ?, birth_date = ?, update_date = now()"
 					 +" WHERE login_id = ?";
-				System.out.println("bbbbbbb");
+
 			// SELECTを実行し、結果表を取得
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, password1);
+			pStmt.setString(1, chengePassword(password1));
 			pStmt.setString(2, name);
 			pStmt.setString(3, birthdate);
 			pStmt.setString(4, loginId);
-			System.out.println("ccccccc");
 			pStmt.executeUpdate();
-
+			System.out.println("info");
 		}
 
 		catch (SQLException e) {
@@ -251,6 +310,58 @@ public class UserDao {
 		}
 	}
 
+	public void partUpdate(String name ,String birthdate, String loginId) {
+		Connection conn = null;
+		try {
+			// データベースへ接続
+			conn = DBManager.getConnection();
+
+			// SELECT文を準備
+				String sql = "UPDATE user SET name = ?, birth_date = ?, update_date = now()"
+					 +" WHERE login_id = ?";
+
+			// SELECTを実行し、結果表を取得
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, name);
+			pStmt.setString(2, birthdate);
+			pStmt.setString(3, loginId);
+			pStmt.executeUpdate();
+			System.out.println("part");
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+
+				}
+			}
+		}
+	}
+
+	private String chengePassword(String password) {
+		//ハッシュ生成前にバイト配列に置き換える際のCharset
+		Charset charset = StandardCharsets.UTF_8;
+		//ハッシュアルゴリズム
+		String algorithm = "MD5";
+
+		//ハッシュ生成処理
+		byte[] bytes = null;
+		try {
+			bytes = MessageDigest.getInstance(algorithm).digest(password.getBytes(charset));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		String result = DatatypeConverter.printHexBinary(bytes);
+		//標準出力
+		return result;
+	}
+
 }
-
-

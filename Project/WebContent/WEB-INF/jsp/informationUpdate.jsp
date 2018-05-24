@@ -35,20 +35,30 @@
 			<!-- --form-- -->
 			<form action="InformationUpdateServlet"method="post">
 			<div class="mini-yohaku-area"></div>
+
+			<input type="hidden" name="login_id" value="${user.loginId}">
+
+			<c:if test="${errMsg != null}">
+				<div class="alert alert-danger" role="alert">${errMsg}</div>
+			</c:if>
+
 			<div class="input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="inputGroup-sizing-sm">password</span>
 				</div>
+
 				<input type="password" name="password1" class="form-control" aria-label="Small"
 					aria-describedby="inputGroup-sizing-sm">
 			</div>
 
 			<div class="yohaku10-area"></div>
+
 			<div class="input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="inputGroup-sizing-sm">password(re-enter)</span>
 				</div>
-				<input type="password"  name="password2" class="form-control" aria-label="Small"
+
+				<input type="password" name="password2"  class="form-control" aria-label="Small"
 					aria-describedby="inputGroup-sizing-sm">
 			</div>
 
@@ -58,7 +68,7 @@
 					<span class="input-group-text" id="inputGroup-sizing-sm">user
 						name</span>
 				</div>
-				<input type="text" value="${user.name}"class="form-control" aria-label="Small"
+				<input type="text" name="name" required value="${user.name}"class="form-control" aria-label="Small"
 					aria-describedby="inputGroup-sizing-sm">
 			</div>
 
@@ -68,7 +78,7 @@
 					<span class="input-group-text" id="inputGroup-sizing-sm">date
 						of birth</span>
 				</div>
-				<input type="text" value="${user.birthDate}" class="form-control" aria-label="Small"
+				<input type="text" name="birthDate" required value="${user.birthDate}" class="form-control" aria-label="Small"
 					aria-describedby="inputGroup-sizing-sm">
 			</div>
 

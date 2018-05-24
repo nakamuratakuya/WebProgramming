@@ -90,19 +90,40 @@
 						role="button">delete</a>
 					</td>
 				</tr>
+
+				<c:if test="${sessionScope.userInfo.loginId == 'admin'}">
 				<c:forEach var="user" items="${userList}" >
 				<tr>
 					<th>${user.loginId}</th>
 					<td>${user.name}</td>
 					<td>${user.birthDate}</td>
 					<td>
-						<a class="btn btn-primary" href="#" role="button">info</a>
+						<a class="btn btn-primary" href="UserInfoServlet?id=${user.id}" role="button">info</a>
 						<a class="btn btn-success" href="InformationUpdateServlet?id=${user.id}" role="button">update</a>
 						<a class="btn btn-danger" href="DeleteServlet?id=${user.id}" role="button">delete</a>
 						 <!-- TODO 未実装；ログインボタンの表示制御を行う -->
 					</td>
 				</tr>
 				</c:forEach>
+				</c:if>
+
+				<c:if test="${sessionScope.userInfo.loginId != 'admin'}">
+				<c:forEach var="user" items="${userList}" >
+				<tr>
+					<th>${user.loginId}</th>
+					<td>${user.name}</td>
+					<td>${user.birthDate}</td>
+					<td>
+						<a class="btn btn-primary" href="UserInfoServlet?id=${user.id}" role="button">info</a>
+					<c:if test="${user.loginId == sessionScope.userInfo.loginId}">
+						<a class="btn btn-success" href="InformationUpdateServlet?id=${user.id}" role="button">update</a>
+					</c:if>
+						 <!-- TODO 未実装；ログインボタンの表示制御を行う -->
+					</td>
+				</tr>
+				</c:forEach>
+				</c:if>
+
 				<tr>
 					<th scope="row">3</th>
 					<td>Larry</td>

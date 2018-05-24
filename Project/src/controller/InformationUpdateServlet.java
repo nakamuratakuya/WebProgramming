@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import model.User;
@@ -37,7 +38,10 @@ public class InformationUpdateServlet extends HttpServlet {
 		UserDao userdao = new UserDao();
 		User user = userdao.selectId(id);
 
-		request.setAttribute("user", user);
+		  // HttpSessionインスタンスの取得
+	    HttpSession session = request.getSession();
+
+		session.setAttribute("user", user);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/informationUpdate.jsp");
 		dispatcher.forward(request, response);
@@ -55,18 +59,49 @@ public class InformationUpdateServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String birthdate = request.getParameter("birthDate");
 		System.out.println(password1+password2);
+		System.out.println(loginId);
+		System.out.println(name);
+		System.out.println(birthdate);
+
+		if(password1.equals("")) {
+			if(password2.equals("")) {
+				System.out.println("ggggggggg");
+				UserDao userDao = new UserDao();
+				userDao.partUpdate(name,birthdate,loginId);
+				response.sendRedirect("UserListServlet");
+				return;
+			}
+			return;
+		}
+
 
 		if(!password1.equals(password2)) {
 			// リクエストスコープにエラーメッセージをセット
 			request.setAttribute("errMsg", "passwordが違います。");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/createUser.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/informationUpdate.jsp");
 			dispatcher.forward(request, response);
+			return;
 		}
+
+		//jsp側でrequiredを使用。
+
+//		if(name  == null)	{
+//			request.setAttribute("errMsg", "入力の無い項目があります。");
+//		}
+
+//		if(birthdate == null) {
+//			request.setAttribute("errMsg", "入力の無い項目があります。");
+//		}
 
 		UserDao userDao = new UserDao();
 		userDao.informationUpdate(password1,name,birthdate,loginId);
 		System.out.println("dddddd");
+
+		HttpSession session = request.getSession();
+		 session.removeAttribute("user");
+
 		response.sendRedirect("UserListServlet");
+
 
 	}
 

@@ -13,8 +13,8 @@
 	<div class="container">
 		<div class="username-area">
 			<p align="right">
-				 ${userInfo.name}さん <span style="margin-right: 12em;"> </span> <a
-					href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/login.html">"log_out"
+				 ${sessionScope.userInfo.name}さん <span style="margin-right: 12em;"> </span> <a
+					href="LogoutServlet">"log_out"
 				</a>
 			</p>
 		</div>
@@ -33,7 +33,7 @@
 					<span class="input-group-text" id="inputGroup-sizing-sm">login
 						ID</span>
 				</div>
-				<input type="text" name="login_id" class="form-control" aria-label="Small"
+				<input type="text" name="login_id" required class="form-control" aria-label="Small"
 					aria-describedby="inputGroup-sizing-sm">
 			</div>
 
@@ -60,7 +60,7 @@
 					<span class="input-group-text" id="inputGroup-sizing-sm">user
 						name</span>
 				</div>
-				<input type="text" name="name" class="form-control" aria-label="Small"
+				<input type="text" name="name" required class="form-control" aria-label="Small"
 					aria-describedby="inputGroup-sizing-sm">
 			</div>
 
@@ -69,7 +69,7 @@
 					<span class="input-group-text" id="inputGroup-sizing-sm">date
 						of birth</span>
 				</div>
-				<input type="date" name="birthdate" class="form-control" >
+				<input type="date" name="birthdate" required class="form-control" >
 			</div>
 
 

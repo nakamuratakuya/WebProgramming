@@ -48,7 +48,7 @@ public class DeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+			
 		String id = request.getParameter("id");
 		UserDao userDao = new UserDao();
 		userDao.userdelete(id);

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,38 +16,38 @@
 		<div class="alert alert-primary" role="alert">
 
 			<p align="right">
-				user san<a
-					href="file:///C:/Users/gunka/Documents/WebProgramming/Mock/login.html"
+				 ${sessionScope.userInfo.loginId} san<a
+					href="LogoutServlet"
 					class="alert-link"><span style="margin-right: 12em;"></span>ログアウト</a>
 			<h1 align="center">user information</h1>
 
 			<div>
 				<h4 style="float: left;">userID</h4>
-				<h4 style="text-align: center;">1</h4>
+				<h4 style="text-align: center">${user.loginId}</h4>
 			</div>
 			<div style="clear: both;"></div>
 
 			<div>
 				<h4 style="float: left;">username</h4>
-				<h4 style="text-align: center;">ちっぴーせんせい</h4>
+				<h4 style="text-align: center">${user.name}</h4>
 			</div>
 			<div style="clear: both;"></div>
 
 			<div>
 				<h4 style="float: left;">date of birth</h4>
-				<h4 style="text-align: center;">知らない</h4>
+				<h4 style="text-align: center;">${user.birthDate}</h4>
 			</div>
 			<div style="clear: both;"></div>
 
 			<div>
 				<h4 style="float: left;">登録日時</h4>
-				<h4 style="text-align: center;">昨日</h4>
+				<h4 style="text-align: center;">${user.createDate}</h4>
 			</div>
 			<div style="clear: both;"></div>
 
 			<div>
 				<h4 style="float: left;">更新日時</h4>
-				<h4 style="text-align: center;">昨日</h4>
+				<h4 style="text-align: center;">${user.updateDate}</h4>
 			</div>
 			<div style="clear: both;"></div>
 			<a
